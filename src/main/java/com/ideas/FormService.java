@@ -26,11 +26,11 @@ public class FormService {
 
 	}
 
-	public void saveForm(String name,String empNo,String amount, String form) {
+	public void saveForm(String name,String empNo,String amount, String form,String date) {
 	
 		DbManager manager = new DbManager();
-		manager.Update("INSERT INTO "+ form+" (employee_name,employee_No,amount) " + "VALUES('"
-				+ name + "','" + empNo + "','" + amount+"');");
+		manager.Update("INSERT INTO "+ form+" (employee_name,employee_No,amount,submission_date) " + "VALUES('"
+				+ name + "','" + empNo + "','" + amount+"','" + date+"');");
 		manager.closeConnection();
 
 	}

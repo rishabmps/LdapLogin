@@ -55,28 +55,39 @@ public class WelcomeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String form = (String) request.getParameter("operation");
-		String employeeName = request.getParameter("name");
-		String amount = request.getParameter("amount");
-		String employeeNumber = request.getParameter("empNo");
+		Employee employee = (Employee) request.getSession().getAttribute("user");
+		String employeeName = employee.getName();
 		FormService service  = new FormService();
-		System.out.println(form + amount+employeeName+employeeNumber);
+		
+		
 	
-		if(null!= form && form.equalsIgnoreCase("healthCare")){
+		String amount = request.getParameter("amount");
+		String employeeNumber = employee.getEmployeeID();
+		String date = request.getParameter("date");
+		System.out.println(form + amount+employeeName+employeeNumber+date);
+		
+		
+	
+		if(null!= form && form.equalsIgnoreCase("healthCare") ){
 			double amountTillNow = service.getTotalAmount(form, employeeName);
 			if(amount==null ||amount.equalsIgnoreCase("")){
 				amount = "0";
 			}
 			double totalAmount = Double.valueOf(amount)+amountTillNow;
 			if(totalAmount >2500){
-				PrintWriter writer = response.getWriter();
-				writer.write("You have surpassed the limit by "+(totalAmount-2500));
+				request.setAttribute("amount", totalAmount-2500);
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Error.jsp");
+				dispatcher.forward(request,response);
+				 
 			}
 			else{
-				service.saveForm(employeeName, employeeNumber, amount, form);
-				request.setAttribute("status", "Success");
-				response.sendRedirect("healthCare.jsp");
+				service.saveForm(employeeName, employeeNumber, amount, form,date);
+				request.setAttribute("amount", 2500-totalAmount);
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Success.jsp");
+				dispatcher.forward(request,response);
 			}
 		}
+		
 		
 
 	}

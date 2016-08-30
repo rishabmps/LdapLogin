@@ -7,19 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>
 <%
 if(request.getAttribute("amount")==null){
 	response.sendRedirect("./Welcome");
 }
 %>
-
-You have successfully submitted the form. Your balance Now is <%
+You have surpassed the limit by <%
 out.println(request.getAttribute("amount"));
-%><br>
-
-<input type="button" value="Print" onclick="print()">
-</h3><br>
+%>
 <a href="./Welcome">
 <input type="button" value="Home" ></a>
 </body>

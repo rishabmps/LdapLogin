@@ -2,36 +2,14 @@
 	pageEncoding="ISO-8859-1"%>
 <%@page import="com.ideas.Employee"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html >
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>HealthCare Form</title>
-<script type="text/javascript">
-function printBody() {
-	window.print();
-}
-function submitForm() {
 
-	var http;
-	debugger;
-	if (window.XMLHttpRequest) {
-		http = new XMLHttpRequest();
-
-	}
-	http.onreadystatechange = function() {
-
-		if (http.readyState == 4 && http.status == 200) {
-			
-			var account = (http.responseText);
-			alert(account);
-		}
-	};
-	document.forms["usrform"].submit();
-	http.open("POST", "./Welcome", true);
-	http.send();
-}
-
-</script>
+<%
+Employee employee = (Employee) request.getSession().getAttribute("user");
+%>
 <link href="resources/css/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet">
 	<script src="resources/javascript/jquery.js"></script>
 	<script src="resources/javascript/jquery-ui.custom.js"></script>
@@ -44,12 +22,13 @@ function submitForm() {
 		  $("input[type=date]").datepicker();
 		}
 	  });
+	
 	</script>
 </head>
-<body>
+<body >
 
 	<%
-		Employee employee = (Employee) request.getSession().getAttribute("user");
+	
 		if (employee == null || !employee.getAuthorized().equalsIgnoreCase("Authorized")) {
 // 			response.sendRedirect("Welcome");
 // 		} else {
@@ -116,14 +95,7 @@ function submitForm() {
 			value="healthCare" >
 			<input type="button" value="Submit" class="button"  onclick="submit()" style="margin-left:42%; width:15%;">
 		</form>
-	<%
-		String status = (String)request.getAttribute("Status");
-		if(status!=null && status.equalsIgnoreCase("Success")){
-	%>
-	<button onclick="printBody()">Print</button>
-	<%
-		}
-	%>
+	
 	</div>
 
 
