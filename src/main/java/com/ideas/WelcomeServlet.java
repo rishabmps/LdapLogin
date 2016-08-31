@@ -65,7 +65,8 @@ public class WelcomeServlet extends HttpServlet {
 		String employeeNumber = employee.getEmployeeID();
 		String date = request.getParameter("date");
 		System.out.println(form + amount+employeeName+employeeNumber+date);
-		
+		String hospital = request.getParameter("hospital");
+		String description = request.getParameter("details");
 		
 	
 		if(null!= form && form.equalsIgnoreCase("healthCare") ){
@@ -82,7 +83,11 @@ public class WelcomeServlet extends HttpServlet {
 			}
 			else{
 				service.saveForm(employeeName, employeeNumber, amount, form,date);
-				request.setAttribute("amount", 2500-totalAmount);
+				request.setAttribute("balance", 2500-totalAmount);
+				Form1 form1;
+				form1 = new Form1(employee, hospital, description, date, amount);
+				request.setAttribute("data", form1);
+				request.setAttribute("amount", amount);
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Success.jsp");
 				dispatcher.forward(request,response);
 			}

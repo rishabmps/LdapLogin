@@ -6,7 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>HealthCare Form</title>
-
+<%
+response.setHeader("Cache-Control","no-cache");
+response.setHeader("Cache-Control","no-store");
+response.setHeader("Pragma","no-cache");
+response.setDateHeader ("Expires", 0);
+%>
 <%
 Employee employee = (Employee) request.getSession().getAttribute("user");
 %>
