@@ -3,11 +3,24 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
+	
+    
+<error-page>
+    <!-- Missing resource -->
+    <error-code>404</error-code>
+    <location>/Error404.html</location>
+</error-page>
+<error-page>
+    <!-- Uncaught exception -->
+    <error-code>500</error-code>
+    <location>/general-error.html</location>
+</error-page>
 
- 	<context-param>
+	<context-param>
 		<param-name>driver</param-name>
 		<param-value>com.mysql.jdbc.Driver</param-value>
 	</context-param>
+	
 	<context-param>
 		<param-name>url</param-name>
 		<param-value>jdbc:mysql://localhost:3306/cabservice?autoReconnect=true</param-value>
@@ -20,7 +33,7 @@
 		<param-name>password</param-name>
 		<param-value>root</param-value>
 	</context-param>
-  <filter>
+	<filter>
 		<filter-name>SecurityFilter</filter-name>
 		<filter-class>waffle.servlet.NegotiateSecurityFilter</filter-class>
 		<init-param>
@@ -60,10 +73,10 @@
 	</filter-mapping>
 	<mime-mapping>
 
-<extension>pdf</extension>
+		<extension>pdf</extension>
 
-<mime-type>application/pdf</mime-type>
+		<mime-type>application/pdf</mime-type>
 
-</mime-mapping>
+	</mime-mapping>
 	
 </web-app>

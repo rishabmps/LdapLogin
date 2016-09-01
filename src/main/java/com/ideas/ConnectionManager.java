@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConnectionManager {
 
-	public Connection connect() {
+	public Connection connect() throws ClassNotFoundException, SQLException {
 		
 		Connection connection = null;
 		try {
@@ -16,10 +16,10 @@ public class ConnectionManager {
 
 		} catch (ClassNotFoundException e) {
 		
-			e.printStackTrace();
+			throw new ClassNotFoundException();
 		} catch (SQLException e) {
 	
-			e.printStackTrace();
+			throw new SQLException();
 		}
 
 		return connection;

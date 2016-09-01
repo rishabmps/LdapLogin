@@ -30,6 +30,10 @@ public class Employee {
 		this.designation = designation;
 	}
 
+	public String getTelephone() {
+		return telephone;
+	}
+
 	public String getDepartment() {
 		return department;
 	}
@@ -77,8 +81,20 @@ public class Employee {
 		return mobile;
 	}
 
-	public String getAddress() {
-		return telephone;
-	}
+	@Override
+	public boolean equals(Object arg0) {
+		Employee employee = (Employee) arg0;
+		if (this.employeeID == employee.getEmployeeID() && this.department == employee.getDepartment()
+				&& this.designation == employee.getDesignation() && this.emailId == employee.getEmailId()
+				&& this.employeeType == employee.getEmployeeType() && this.mobile == employee.getMobile()
+				&& this.name == employee.getName() && this.authorized == this.getAuthorized()
+				&& this.telephone == employee.getTelephone() && this.username == employee.getUsername()) {
 
+			return true;
+		} else {
+
+			return false;
+		}
+
+	}
 }

@@ -22,7 +22,7 @@
 		<br>
 		<%
 			out.println(employee.getAuthorized() + "\n");
-				if (!employee.getAuthorized().equalsIgnoreCase("Authorized")) {
+				if (employee.getAuthorized().equalsIgnoreCase("Authorized")) {
 		%>
 		<div>
 			<a href="healthCare.jsp">healthCare Form</a>

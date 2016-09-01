@@ -28,8 +28,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/idnrsj/Downloads/com.lowagie.text-2.1.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/idnrsj/Downloads/itextpdf-5.5.9.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

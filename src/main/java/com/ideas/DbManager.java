@@ -8,45 +8,50 @@ import java.sql.Statement;
 public class DbManager {
 	Connection connection;
 
-	public ResultSet findAll(String query) {
+	public ResultSet findAll(String query) throws ClassNotFoundException, SQLException {
 		ConnectionManager manager = new ConnectionManager();
-		connection = manager.connect();
 		ResultSet result = null;
 		try {
+			connection = manager.connect();
+			
 			Statement statement = connection.createStatement();
 			result = statement.executeQuery(query);
 			return result;
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			throw new SQLException();
+		} catch (ClassNotFoundException e) {
+			
+			throw new ClassNotFoundException();
 		}
 
-		return result;
+		
 
 	}
 
-	public void Update(String query) {
+	public void Update(String query) throws SQLException {
 		ConnectionManager manager = new ConnectionManager();
-		connection = manager.connect();
+		
 
 		try {
+			connection = manager.connect();
 			Statement statement = connection.createStatement();
 			statement.executeUpdate(query);
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SQLException();
+		} catch (ClassNotFoundException e) {
+			throw new SQLException();
 		}
 
 	}
 
-	public void closeConnection() {
+	public void closeConnection() throws SQLException {
 		try {
 			connection.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SQLException();
 		}
 
 	}

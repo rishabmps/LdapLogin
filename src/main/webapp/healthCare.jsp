@@ -35,8 +35,8 @@ Employee employee = (Employee) request.getSession().getAttribute("user");
 	<%
 	
 		if (employee == null || !employee.getAuthorized().equalsIgnoreCase("Authorized")) {
-// 			response.sendRedirect("Welcome");
-// 		} else {
+			response.sendRedirect("Welcome");
+		} else {
 	%>
 	<div>
 		<div></div>

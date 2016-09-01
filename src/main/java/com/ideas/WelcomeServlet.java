@@ -2,6 +2,7 @@ package com.ideas;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -51,7 +52,7 @@ public class WelcomeServlet extends HttpServlet {
 	// Gson gson = new Gson();
 	// return gson.toJson(retrievedUserInfo);
 	// }
-
+ 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String form = (String) request.getParameter("operation");
@@ -70,7 +71,16 @@ public class WelcomeServlet extends HttpServlet {
 		
 	
 		if(null!= form && form.equalsIgnoreCase("healthCare") ){
-			double amountTillNow = service.getTotalAmount(form, employeeName);
+			double amountTillNow = 0;
+			try {
+				amountTillNow = service.getTotalAmount(form, employeeName);
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			if(amount==null ||amount.equalsIgnoreCase("")){
 				amount = "0";
 			}
@@ -82,7 +92,12 @@ public class WelcomeServlet extends HttpServlet {
 				 
 			}
 			else{
-				service.saveForm(employeeName, employeeNumber, amount, form,date);
+				try {
+					service.saveForm(employeeName, employeeNumber, amount, form,date);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				request.setAttribute("balance", 2500-totalAmount);
 				Form1 form1;
 				form1 = new Form1(employee, hospital, description, date, amount);

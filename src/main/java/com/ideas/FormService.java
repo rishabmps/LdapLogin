@@ -2,11 +2,10 @@ package com.ideas;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class FormService {
 
-	public Integer getCount(String query) {
+	public Integer getCount(String query) throws ClassNotFoundException, SQLException {
 		
 		DbManager manager = new DbManager();
 		Integer count = 0;
@@ -26,7 +25,7 @@ public class FormService {
 
 	}
 
-	public void saveForm(String name,String empNo,String amount, String form,String date) {
+	public void saveForm(String name,String empNo,String amount, String form,String date) throws SQLException {
 	
 		DbManager manager = new DbManager();
 		manager.Update("INSERT INTO "+ form+" (employee_name,employee_No,amount,submission_date) " + "VALUES('"
@@ -35,7 +34,7 @@ public class FormService {
 
 	}
 
-	public double getTotalAmount(String form,String name) {
+	public double getTotalAmount(String form,String name) throws ClassNotFoundException, SQLException {
 		DbManager manager = new DbManager();
 		double amount = 0;
 		ResultSet executeQuery = manager.findAll("select amount From "+form+" where employee_name='"+name+"'");
